@@ -1,1 +1,3 @@
 # flask-vue-practice
+init
+
