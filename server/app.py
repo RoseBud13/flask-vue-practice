@@ -16,9 +16,13 @@ app.config.from_object(__name__)
 CORS(app, resources={r'/*': {'origins': '*'}})
 
 
-@app.route('/')
+@app.route('/flask')
+def flask():
+    return jsonify('flask test and say hello')
+
+@app.route('/test')
 def test():
-    return jsonify('test')
+    return 'test'
 
 
 if __name__ == '__main__':

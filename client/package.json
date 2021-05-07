@@ -2,11 +2,13 @@
   "name": "client",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "vite --mode development",
+    "build:beta": "vite build --mode beta",
+    "build:release": "vite build --mode release",
     "serve": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.20.0-0",
     "vue": "^3.0.5",
     "vue-router": "^4.0.6"
   },
