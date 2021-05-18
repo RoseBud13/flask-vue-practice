@@ -1,0 +1,23 @@
+"""
+application.py
+- creates a Flask app instance and registers the database object
+"""
+
+from flask import Flask
+
+
+def create_app(app_name='RAS_API'):
+    app = Flask(app_name)
+    app.config.from_object('rasapi.config.BaseConfig')
+
+    from rasapi.api import api
+    app.register_blueprint(api, url_prefix="/")
+
+    from rasapi.commands import cmd
+    app.register_blueprint(cmd)
+
+    from rasapi.models import db
+    db.init_app(app)
+
+    return app
+   
