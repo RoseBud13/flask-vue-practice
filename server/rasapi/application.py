@@ -14,7 +14,7 @@ def create_app(app_name='RAS_API'):
     cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     from rasapi.api import api
-    app.register_blueprint(api, url_prefix="/")
+    app.register_blueprint(api, url_prefix="/api")
 
     from rasapi.commands import cmd
     app.register_blueprint(cmd)

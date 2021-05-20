@@ -1,22 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <ConfigProvider v-bind="lockEvent" :locale="getAntdLocale">
+    <AppProvider>
+      <RouterView />
+    </AppProvider>
+  </ConfigProvider>
 </template>
 
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import { ConfigProvider } from 'ant-design-vue';
+  import { AppProvider } from '/@/components/Application';
 
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
+  import { useLockPage } from '/@/hooks/web/useLockPage';
+  import { useTitle } from '/@/hooks/web/useTitle';
+  import { useLocale } from '/@/locales/useLocale';
+
+  export default defineComponent({
+    name: 'App',
+    components: { ConfigProvider, AppProvider },
+    setup() {
+      useTitle();
+
+      // support Multi-language
+      const { getAntdLocale } = useLocale();
+
+      // Create a lock screen monitor
+      const lockEvent = useLockPage();
+
+      return { getAntdLocale, lockEvent };
+    },
+  });
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
