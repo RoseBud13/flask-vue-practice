@@ -1,0 +1,190 @@
+<template>
+    <div>
+        <div class="crumbs">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item>
+                    <i class="el-icon-lx-cascades"></i> Resources
+                </el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+        <div class="container">
+            <el-table
+                :data="resources"
+                border
+                stripe
+                class="table"
+                ref="multipleTable"
+                header-cell-class-name="table-header"
+                style="width: 100%"
+            >
+                <el-table-column type="selection" width="55" align="center"></el-table-column>
+
+                <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
+
+                <el-table-column prop="rsrc_name" label="Resource Name"></el-table-column>
+                
+                <el-table-column label="Status" align="center">
+                    <template #default="scope">
+                        <el-tag
+                            :type="
+                                scope.row.status === 'active'
+                                    ? 'success'
+                                    : scope.row.status === 'removed'
+                                    ? 'danger'
+                                    : ''
+                            "
+                        >{{ scope.row.status }}</el-tag>
+                    </template>
+                </el-table-column>
+
+                <el-table-column prop="description" label="Description"></el-table-column>
+
+                <el-table-column prop="rsrc_type" label="Type"></el-table-column>
+
+                <el-table-column label="Operation" width="180" align="center">
+                    <template #default="scope">
+                        <el-button
+                            type="text"
+                            icon="el-icon-s-order"
+                            @click="handleEdit(scope.$index, scope.row)"
+                        >Edit</el-button>
+                        <el-button
+                            type="text"
+                            icon="el-icon-delete"
+                            class="red"
+                            @click="handleDelete(scope.$index, scope.row)"
+                        >Delete</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+
+        <!-- 编辑弹出框 -->
+        <el-dialog title="Edit" v-model="editVisible" width="30%">
+            <el-form ref="form" :model="rsrc" label-width="70px">
+                <el-form-item label="Resource Name">
+                    <el-input v-model="rsrc.rsrc_name"></el-input>
+                </el-form-item>
+                <el-form-item label="Description">
+                    <el-input v-model="rsrc.description"></el-input>
+                </el-form-item>
+                <el-form-item label="Type">
+                    <el-input v-model="rsrc.rsrc_type"></el-input>
+                </el-form-item>
+                <el-form-item label="Status">
+                    <el-input v-model="rsrc.status"></el-input>
+                </el-form-item>
+            </el-form>
+            <template #footer>
+                <span class="dialog-footer">
+                    <el-button id="volvo" @click="editVisible=false">Cancel</el-button>
+                    <el-button id="volvo" @click="saveEdit">Confirm</el-button>
+                </span>
+            </template>
+        </el-dialog>
+    </div>
+</template>
+
+<script>
+import { fetchResources, deleteResource, updateResource } from '../api/index'
+
+export default {
+    name: "resources",
+    data() {
+        return {
+            resources: [],
+            editVisible: false,
+            rsrc: {
+                rsrc_name: '',
+                description: '',
+                status: '',
+                rsrc_type: ''
+            },
+            idx: -1,
+            updatedRsrc: null
+        };
+    },
+    created() {
+        this.fetchData();
+    },
+    methods: {
+        fetchData() {
+            fetchResources().then(response => {
+                console.log(response);
+                this.resources = response.resources
+            })
+        },
+
+        handleEdit(index, row) {
+            this.idx = index;
+            this.editVisible = true;
+            this.rsrc = row;
+        },
+
+        saveEdit() {
+            this.updatedRsrc = {
+                rsrc_name: this.rsrc.rsrc_name,
+                description: this.rsrc.description,
+                status: this.rsrc.status,
+                rsrc_type: this.rsrc.rsrc_type
+            }
+            updateResource(this.rsrc.id, this.updatedRsrc)
+            .then(() => {
+                this.$message.success(`Update row ${this.idx + 1} succeed`);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+            this.editVisible = false;
+        },
+
+        handleDelete(index, row) {
+            this.$confirm('Confirm to remove this resource?', 'Warning', {
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            type: 'warning'
+        })
+        .then(async() => {
+            await deleteResource(row.id)
+            this.resources.splice(index, 1)
+            this.$message({
+                type: 'success',
+                message: 'Delete succeed!'
+            })
+        })
+        .catch(err => { console.error(err) })
+        },
+    }
+};
+</script>
+
+<style scoped>
+.handle-box {
+    margin-bottom: 20px;
+}
+
+.handle-select {
+    width: 120px;
+}
+
+.handle-input {
+    width: 300px;
+    display: inline-block;
+}
+.table {
+    width: 100%;
+    font-size: 14px;
+}
+.red {
+    color: #ff0000;
+}
+.mr10 {
+    margin-right: 10px;
+}
+.table-td-thumb {
+    display: block;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+}
+</style>
