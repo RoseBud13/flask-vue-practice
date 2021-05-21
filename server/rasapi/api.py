@@ -30,8 +30,34 @@ def get_add_resources():
         return jsonify(resource.to_dict()), 201
 
 
-@api.route('/resources/<int:id>/')
-def get_resource(id):
+@api.route('/resources/<int:id>/', methods=('GET', 'PUT'))
+def get_update_resource(id):
     resource = Resource.query.get(id)
-    return jsonify({'resource': resource.to_dict()})
+    
+    if request.method == 'GET':
+        return jsonify({'resource': resource.to_dict()})
 
+    elif request.method == 'PUT':
+        data = request.get_json()
+
+        rsrc_name = data['rsrc_name']
+        status = data['status']
+        description = data['description']
+        rsrc_type = data['rsrc_type']
+
+        resource.rsrc_name = rsrc_name
+        resource.status = status
+        resource.description = description
+        resource.rsrc_type = rsrc_type
+
+        db.session.commit()
+        return jsonify(resource.to_dict()), 201
+
+
+
+@api.route('/resources/<int:id>/', methods=["DELETE"])
+def delete_resource(id):
+    resource = Resource.query.get_or_404(id)
+    db.session.delete(resource)
+    db.session.commit()
+    return "Deleted"
