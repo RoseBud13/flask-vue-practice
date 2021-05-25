@@ -11,9 +11,21 @@
         <div v-if="!added">
             <div class="container">
             <div class="form-box">
-                <el-form ref="Resource" :model="Resource" label-width="80px">
+                <el-form ref="Resource" :model="Resource" label-width="150px">
                     <el-form-item label="Name" required>
                         <el-input v-model="Resource.rsrc_name"></el-input>
+                    </el-form-item>
+                    <el-form-item label="Department" required>
+                        <el-input v-model="Resource.department"></el-input>
+                    </el-form-item>
+                    <el-form-item label="CI Level" required>
+                        <el-input v-model="Resource.ci_level"></el-input>
+                    </el-form-item>
+                    <el-form-item label="Responsible User" required>
+                        <el-input v-model="Resource.responsible_user"></el-input>
+                    </el-form-item>
+                    <el-form-item label="Location" required>
+                        <el-input v-model="Resource.location"></el-input>
                     </el-form-item>
                     <el-form-item label="Type" required>
                         <el-select v-model="Resource.rsrc_type" placeholder="Please select">
@@ -57,9 +69,13 @@ export default {
         return {
             Resource: {
                 rsrc_name: '',
-                rsrc_type: '',
+                department: '',
+                ci_level: '',
+                responsible_user: '',
+                location: '',
                 description: '',
-                status: ''
+                status: '',
+                rsrc_type: ''
             },
             added: false,
         };
@@ -68,6 +84,10 @@ export default {
         createResource() {
             let data = {
                 rsrc_name: this.Resource.rsrc_name,
+                department: this.Resource.department,
+                ci_level: this.Resource.ci_level,
+                responsible_user: this.Resource.responsible_user,
+                location: this.Resource.location,
                 status: this.Resource.status,
                 description: this.Resource.description,
                 rsrc_type: this.Resource.rsrc_type

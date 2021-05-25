@@ -17,11 +17,12 @@
                 header-cell-class-name="table-header"
                 style="width: 100%"
             >
-                <el-table-column type="selection" width="55" align="center"></el-table-column>
 
                 <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
 
                 <el-table-column prop="rsrc_name" label="Resource Name"></el-table-column>
+
+                <el-table-column prop="department" label="Department"></el-table-column>
                 
                 <el-table-column label="Status" align="center">
                     <template #default="scope">
@@ -36,6 +37,12 @@
                         >{{ scope.row.status }}</el-tag>
                     </template>
                 </el-table-column>
+
+                <el-table-column prop="ci_level" label="CI Level"></el-table-column>
+
+                <el-table-column prop="responsible_user" label="Responsible User"></el-table-column>
+
+                <el-table-column prop="location" label="Location"></el-table-column>
 
                 <el-table-column prop="description" label="Description"></el-table-column>
 
@@ -60,10 +67,22 @@
         </div>
 
         <!-- 编辑弹出框 -->
-        <el-dialog title="Edit" v-model="editVisible" width="30%">
-            <el-form ref="form" :model="rsrc" label-width="70px">
+        <el-dialog title="Edit" v-model="editVisible" width="50%">
+            <el-form ref="form" :model="rsrc" label-width="150px">
                 <el-form-item label="Resource Name">
                     <el-input v-model="rsrc.rsrc_name"></el-input>
+                </el-form-item>
+                <el-form-item label="Department">
+                    <el-input v-model="rsrc.department"></el-input>
+                </el-form-item>
+                <el-form-item label="CI Level">
+                    <el-input v-model="rsrc.ci_level"></el-input>
+                </el-form-item>
+                <el-form-item label="Responsible User">
+                    <el-input v-model="rsrc.responsible_user"></el-input>
+                </el-form-item>
+                <el-form-item label="Location">
+                    <el-input v-model="rsrc.location"></el-input>
                 </el-form-item>
                 <el-form-item label="Description">
                     <el-input v-model="rsrc.description"></el-input>
@@ -96,6 +115,10 @@ export default {
             editVisible: false,
             rsrc: {
                 rsrc_name: '',
+                department: '',
+                ci_level: '',
+                responsible_user: '',
+                location: '',
                 description: '',
                 status: '',
                 rsrc_type: ''
@@ -124,6 +147,10 @@ export default {
         saveEdit() {
             this.updatedRsrc = {
                 rsrc_name: this.rsrc.rsrc_name,
+                department: this.rsrc.department,
+                ci_level: this.rsrc.ci_level,
+                responsible_user: this.rsrc.responsible_user,
+                location: this.rsrc.location,
                 description: this.rsrc.description,
                 status: this.rsrc.status,
                 rsrc_type: this.rsrc.rsrc_type

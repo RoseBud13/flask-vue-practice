@@ -24,7 +24,7 @@ def get_add_resources():
         return jsonify({'resources': [r.to_dict() for r in resources]})
     elif request.method == 'POST':
         data = request.get_json()
-        resource = Resource(rsrc_name=data['rsrc_name'], status=data['status'], description=data['description'], rsrc_type=data['rsrc_type'])
+        resource = Resource(rsrc_name=data['rsrc_name'], department=data['department'], ci_level=data['ci_level'], responsible_user=data['responsible_user'], location=data['location'], status=data['status'], description=data['description'], rsrc_type=data['rsrc_type'])
         db.session.add(resource)
         db.session.commit()
         return jsonify(resource.to_dict()), 201
@@ -41,11 +41,19 @@ def get_update_resource(id):
         data = request.get_json()
 
         rsrc_name = data['rsrc_name']
+        department=data['department']
+        ci_level=data['ci_level']
+        responsible_user=data['responsible_user']
+        location=data['location']
         status = data['status']
         description = data['description']
         rsrc_type = data['rsrc_type']
 
         resource.rsrc_name = rsrc_name
+        resource.department = department
+        resource.ci_level = ci_level
+        resource.responsible_user = responsible_user
+        resource.location = location
         resource.status = status
         resource.description = description
         resource.rsrc_type = rsrc_type
