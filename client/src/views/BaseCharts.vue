@@ -9,20 +9,12 @@
         </div>
         <div class="container">
             <div class="schart-box">
-                <div class="content-title">Progress</div>
+                <div class="content-title">Test Cases</div>
                 <schart class="schart" canvasId="bar" :options="options1"></schart>
             </div>
             <div class="schart-box">
-                <div class="content-title">Burndown Chart</div>
+                <div class="content-title">Bugs</div>
                 <schart class="schart" canvasId="line" :options="options2"></schart>
-            </div>
-            <div class="schart-box">
-                <div class="content-title">User Stroies</div>
-                <schart class="schart" canvasId="pie" :options="options3"></schart>
-            </div>
-            <div class="schart-box">
-                <div class="content-title">Points</div>
-                <schart class="schart" canvasId="ring" :options="options4"></schart>
             </div>
         </div>
     </div>
@@ -40,25 +32,25 @@ export default {
             options1: {
                 type: 'bar',
                 title: {
-                    text: 'Sprint 4'
+                    text: 'Test Case Performed'
                 },
                 bgColor: '#fbfbfb',
                 labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8"],
                 datasets: [
                     {
-                        label: 'Julia',
+                        label: '522A',
                         data: [0, 2, 3, 5, 2, 0, 0, 0]
                     },
                     {
-                        label: 'Zhou',
+                        label: '622A',
                         data: [0, 1, 2, 4, 4, 3, 7, 10]
                     },
                     {
-                        label: 'Sean',
+                        label: 'V536',
                         data: [0, 2, 0, 0, 0, 0, 4, 0]
                     },
                     {
-                        label: 'Kaijie',
+                        label: 'V519',
                         data: [0, 6, 0, 1, 10, 2, 3, 0]
                     }
                 ]
@@ -66,17 +58,17 @@ export default {
             options2: {
                 type: 'line',
                 title: {
-                    text: 'Sprint 4 Burndown Chart'
+                    text: 'Issue Fixed'
                 },
                 bgColor: '#fbfbfb',
                 labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8"],
                 datasets: [
                     {
-                        label: 'Plan',
+                        label: 'Total',
                         data: [88, 88, 88, 90, 90, 90, 90, 93]
                     },
                     {
-                        label: 'Burndown',
+                        label: 'Remain',
                         data: [88, 77, 72, 64, 48, 43, 29, 22]
                     },
                     {

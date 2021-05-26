@@ -58,7 +58,7 @@ export default {
                 {
                     icon: "el-icon-lx-home",
                     index: "dashboard",
-                    title: "Dashboard"
+                    title: "Home"
                 },
                 {
                     icon: "el-icon-lx-cascades",
@@ -66,24 +66,20 @@ export default {
                     title: "Resources"
                 },
                 {
-                    icon: "el-icon-lx-calendar",
-                    index: "3",
-                    title: "Upload",
-                    subs: [
-                        {
-                            index: "add",
-                            title: "Add Resource"
-                        },
-                        {
-                            index: "upload",
-                            title: "File Upload"
-                        }
-                    ]
+                    icon: "el-icon-lx-cascades",
+                    index: "add",
+                    title: "Add Resource"
                 },
+                {
+                    icon: "el-icon-lx-cascades",
+                    index: "reservations",
+                    title: "Reservations"
+                },
+        
                 {
                     icon: "el-icon-pie-chart",
                     index: "data",
-                    title: "Data"
+                    title: "Dashboard"
                 }
             ]
         };

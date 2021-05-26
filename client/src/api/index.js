@@ -37,3 +37,19 @@ export function updateResource(id, data) {
     data
   })
 }
+
+export function fetchReservations(query) {
+  return request({
+    url: `/reservations/`,
+    method: 'get',
+    params: query
+  })
+}
+
+export function addReservation(data) {
+  return request({
+    url: `/reservations/`,
+    method: 'post',
+    data
+  })
+}

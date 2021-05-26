@@ -14,7 +14,7 @@ const routes = [
                 path: "/dashboard",
                 name: "dashboard",
                 meta: {
-                    title: 'Dashboard'
+                    title: 'Home'
                 },
                 component: () => import (
                 /* webpackChunkName: "dashboard" */
@@ -29,10 +29,19 @@ const routes = [
                 /* webpackChunkName: "table" */
                 "../views/Resources.vue")
             }, {
+                path: "/reservations",
+                name: "reservations",
+                meta: {
+                    title: 'Reservations'
+                },
+                component: () => import (
+                /* webpackChunkName: "table" */
+                "../views/Reservations.vue")
+            }, {
                 path: "/data",
                 name: "basecharts",
                 meta: {
-                    title: 'Data'
+                    title: 'Dashboard'
                 },
                 component: () => import (
                 /* webpackChunkName: "charts" */

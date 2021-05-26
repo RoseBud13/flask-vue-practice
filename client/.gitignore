@@ -2,6 +2,10 @@
 node_modules
 /dist
 
+/src/assets/img
+/public/favicon.png
+
+
 
 # local env files
 .env.local
