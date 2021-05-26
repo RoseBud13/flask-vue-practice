@@ -5,7 +5,6 @@ node_modules
 /src/assets/img
 /public/favicon.png
 
-package-lock.json
 
 
 # local env files
