@@ -7,7 +7,7 @@ commands.py
 import click
 
 from flask import Blueprint
-from rasapi.models import db, Resource
+from rasapi.models import db, Resource, Reservation
 
 
 cmd = Blueprint('cmd', __name__)
@@ -29,11 +29,11 @@ def forgersrc():
     db.create_all()
 
     resources = [
-        {'rsrc_name': 'ad-adlab-hil-1', 'department': 'dept', 'status': 'active', 'ci_level': 'component', 'responsible_user': '1', 'location': 'CIC', 'description': 'AD Lab Vector HIL rig for VCU1 and AD sensors', 'rsrc_type': 'HIL'},
-        {'rsrc_name': 'adas-component-hil', 'department': 'dept', 'status': 'active', 'ci_level': 'component', 'responsible_user': '1', 'location': 'CIC', 'description': 'asdm flc2 flr production rig', 'rsrc_type': 'HIL'},
-        {'rsrc_name': 'eh-icup-1', 'department': 'dept', 'status': 'active', 'ci_level': 'component', 'responsible_user': '1', 'location': 'CIC', 'description': 'used for EH 522A and 622A project test', 'rsrc_type': 'Boxcar'},
-        {'rsrc_name': 'adas-domian-hil-argus2-pds-1', 'department': 'dept', 'status': 'removed', 'ci_level': 'component', 'responsible_user': '1', 'location': 'CIC', 'description': 'PDS ADAS HIL rig', 'rsrc_type': 'HIL'},
-        {'rsrc_name': 'steer-component-pscm-cma-pds-2', 'department': 'dept', 'status': 'maintenance', 'ci_level': 'component', 'responsible_user': '1', 'location': 'CIC', 'description': 'PDS steer bench', 'rsrc_type': 'Test bench'},
+        {'rsrc_name': 'PSCM-Bench-SPA2-PDS', 'department': 'Vehicle Platform', 'status': 'active', 'ci_level': 'component', 'responsible_user': 'Deng, Yibo', 'location': 'CIC', 'description': '', 'rsrc_type': 'Bench'},
+        {'rsrc_name': 'MiniHIL-HIL-SPA2-PDS', 'department': 'Vehicle Platform', 'status': 'active', 'ci_level': 'component', 'responsible_user': 'Cheng, yuxin', 'location': 'CIC', 'description': '', 'rsrc_type': 'HIL'},
+        {'rsrc_name': 'VCUapp-HIL-SPA2-PDS', 'department': 'Software& Electronic Platform', 'status': 'active', 'ci_level': 'system', 'responsible_user': 'Magnus', 'location': 'CIC', 'description': '', 'rsrc_type': 'HIL'},
+        {'rsrc_name': 'Boxcar620C/MP1-Boxcar-SPA2-PDS', 'department': 'Software& Electronic Platform', 'status': 'removed', 'ci_level': 'system', 'responsible_user': 'Zhu, Rong', 'location': 'CIC', 'description': '620C/MP1', 'rsrc_type': 'Boxcar'},
+        {'rsrc_name': 'ITA-HILs-HIL-ICUP-PDS', 'department': 'Connected Experience', 'status': 'maintenance', 'ci_level': 'domain', 'responsible_user': 'Wang, jinyan', 'location': 'CIC', 'description': '', 'rsrc_type': 'HIL'},
     ]
 
     for r in resources:

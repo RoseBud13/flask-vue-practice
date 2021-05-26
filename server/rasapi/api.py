@@ -5,7 +5,7 @@ api.py
 """
 
 from flask import Blueprint, jsonify, request
-from .models import db, Resource
+from .models import db, Resource, Reservation
 
 
 api = Blueprint('api', __name__)
@@ -69,3 +69,16 @@ def delete_resource(id):
     db.session.delete(resource)
     db.session.commit()
     return "Deleted"
+
+
+@api.route('/reservations/', methods=('GET','POST'))
+def get_add_reservation():
+    if request.method == 'GET':
+        reservations = Reservation.query.all()
+        return jsonify({'reservations': [rs.to_dict() for rs in reservations]})
+    elif request.method == 'POST':
+        data = request.get_json()
+        reservation = Reservation(booked_rsrc_name=data['booked_rsrc_name'], booked_for_name=data['booked_for_name'], booked_by_name=data['booked_by_name'], booked_from=data['booked_from'], booked_until=data['booked_until'], description=data['description'])
+        db.session.add(reservation)
+        db.session.commit()
+        return jsonify(reservation.to_dict()), 201

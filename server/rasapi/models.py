@@ -53,3 +53,24 @@ class Resource(db.Model):
                     location=self.location,
                     description=self.description,
                     rsrc_type=self.rsrc_type)
+
+
+class Reservation(db.Model):
+    __tablename__ = 'reservation'
+
+    id = db.Column(db.Integer, primary_key=True)
+    booked_rsrc_name = db.Column(db.String(50))
+    booked_for_name = db.Column(db.String(50))
+    booked_by_name =db.Column(db.String(50))
+    booked_from = db.Column(db.String(50))
+    booked_until = db.Column(db.String(50))
+    description = db.Column(db.String(255))
+
+    def to_dict(self):
+        return dict(id=self.id,
+                    booked_rsrc_name=self.booked_rsrc_name,
+                    booked_for_name=self.booked_for_name,
+                    booked_by_name=self.booked_by_name,
+                    booked_from=self.booked_from,
+                    booked_until=self.booked_until,
+                    description=self.description)
