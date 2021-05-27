@@ -234,6 +234,8 @@ export default {
             });
 
             this.bookVisible = false;
+
+            this.$router.go(this.$router.currentRoute)
         },
 
         handleEdit(index, row) {

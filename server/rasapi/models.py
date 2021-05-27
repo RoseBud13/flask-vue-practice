@@ -56,7 +56,7 @@ class Resource(db.Model):
 
 
 class Reservation(db.Model):
-    __tablename__ = 'reservation'
+    __tablename__ = 'reservations'
 
     id = db.Column(db.Integer, primary_key=True)
     booked_rsrc_name = db.Column(db.String(50))

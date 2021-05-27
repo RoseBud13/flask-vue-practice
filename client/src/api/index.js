@@ -1,5 +1,8 @@
 import request from '../utils/request'
 
+
+// -----------------------------------------------Resources----------------------------------------
+
 export function fetchResources(query) {
   return request({
     url: '/resources/',
@@ -38,6 +41,8 @@ export function updateResource(id, data) {
   })
 }
 
+// -----------------------------------------------Reservations----------------------------------------
+
 export function fetchReservations(query) {
   return request({
     url: `/reservations/`,
@@ -51,5 +56,27 @@ export function addReservation(data) {
     url: `/reservations/`,
     method: 'post',
     data
+  })
+}
+
+export function getReservation(id) {
+  return request({
+    url: `/reservations/${id}/`,
+    method: 'get'
+  })
+}
+
+export function updateReservation(id, data) {
+  return request({
+    url: `/reservations/${id}/`,
+    method: 'put',
+    data
+  })
+}
+
+export function cancelReservation(id) {
+  return request({
+    url: `/reservations/${id}/`,
+    method: 'delete'
   })
 }

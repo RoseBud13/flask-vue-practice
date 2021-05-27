@@ -72,7 +72,7 @@ def delete_resource(id):
 
 
 @api.route('/reservations/', methods=('GET','POST'))
-def get_add_reservation():
+def get_add_reservations():
     if request.method == 'GET':
         reservations = Reservation.query.all()
         return jsonify({'reservations': [rs.to_dict() for rs in reservations]})
@@ -82,3 +82,39 @@ def get_add_reservation():
         db.session.add(reservation)
         db.session.commit()
         return jsonify(reservation.to_dict()), 201
+
+
+@api.route('/reservations/<int:id>/', methods=('GET', 'PUT'))
+def get_update_reservation(id):
+    reservation = Reservation.query.get(id)
+    
+    if request.method == 'GET':
+        return jsonify({'reservation': reservation.to_dict()})
+
+    elif request.method == 'PUT':
+        data = request.get_json()
+
+        booked_rsrc_name = data['booked_rsrc_name']
+        booked_for_name = data['booked_for_name']
+        booked_by_name = data['booked_by_name']
+        booked_from = data['booked_from']
+        booked_until = data['booked_until']
+        description = data['description']
+
+        reservation.booked_rsrc_name = booked_rsrc_name
+        reservation.booked_for_name = booked_for_name
+        reservation.booked_by_name = booked_by_name
+        reservation.booked_from = booked_from
+        reservation.booked_until = booked_until
+        reservation.description = description
+
+        db.session.commit()
+        return jsonify(reservation.to_dict()), 201
+
+
+@api.route('/reservations/<int:id>/', methods=["DELETE"])
+def delete_reservation(id):
+    reservation = Reservation.query.get_or_404(id)
+    db.session.delete(reservation)
+    db.session.commit()
+    return "Deleted"
