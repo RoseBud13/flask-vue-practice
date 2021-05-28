@@ -60,6 +60,7 @@ class Reservation(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     booked_rsrc_name = db.Column(db.String(50))
+    booked_rsrc_id = db.Column(db.Integer)
     booked_for_name = db.Column(db.String(50))
     booked_by_name =db.Column(db.String(50))
     booked_from = db.Column(db.String(50))
@@ -69,6 +70,7 @@ class Reservation(db.Model):
     def to_dict(self):
         return dict(id=self.id,
                     booked_rsrc_name=self.booked_rsrc_name,
+                    booked_rsrc_id=self.booked_rsrc_id,
                     booked_for_name=self.booked_for_name,
                     booked_by_name=self.booked_by_name,
                     booked_from=self.booked_from,

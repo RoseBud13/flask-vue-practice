@@ -18,7 +18,7 @@
                 style="width: 100%"
             >
 
-                <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
+                <el-table-column prop="booked_rsrc_id" label="Resource ID"></el-table-column>
 
                 <el-table-column prop="booked_rsrc_name" label="Resource Name"></el-table-column>
 
@@ -31,6 +31,8 @@
                 <el-table-column prop="booked_until" label="End Date"></el-table-column>
 
                 <el-table-column prop="description" label="Description"></el-table-column>
+
+                <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
 
                 <el-table-column label="Operation" width="200" align="center">
                     <template #default="scope">
@@ -86,14 +88,16 @@ export default {
             reservations: [],
             editVisible: false,
             rsvt: {
-                booked_src_name: '',
+                booked_rsrc_name: '',
+                booked_rsrc_id: '',
                 booked_for_name: '',
                 booked_by_name: '',
                 booked_from_date: '',
                 booked_until_date: '',
                 description: ''
             },
-            updatedRsvt: null
+            currentRsrc: null,
+            updatedRsvt: null,
         }
     },
     created() {
@@ -115,7 +119,8 @@ export default {
 
         saveEditRsvt() {
             this.updatedRsvt = {
-                booked_src_name: this.rsvt.booked_src_name,
+                booked_rsrc_name: this.rsvt.booked_rsrc_name,
+                booked_rsrc_id: this.rsvt.booked_rsrc_id,
                 booked_for_name: this.rsvt.booked_for_name,
                 booked_by_name: this.rsvt.booked_by_name,
                 booked_from_date: this.rsvt.booked_from_date,

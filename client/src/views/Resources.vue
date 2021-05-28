@@ -201,6 +201,7 @@ export default {
         saveBook() {
             let data = {
                 booked_rsrc_name: this.rsrc.rsrc_name,
+                booked_rsrc_id: this.rsrc.id,
                 booked_for_name: this.reservation.booked_for_name,
                 booked_by_name: this.reservation.booked_by_name,
                 booked_from: this.reservation.booked_from,

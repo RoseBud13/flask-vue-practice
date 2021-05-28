@@ -1,32 +1,15 @@
 <template>
-    <div>
-        <div class="crumbs">
-            <el-breadcrumb separator="/">
-                <el-breadcrumb-item>
-                    <i class="el-icon-pie-chart"></i> Data
-                </el-breadcrumb-item>
-            </el-breadcrumb>
-        </div>
-        <div class="container">
-            <div class="schart-box">
-                <div class="content-title">Test Cases</div>
-                <schart class="schart" canvasId="bar" :options="options1"></schart>
-            </div>
-            <div class="schart-box">
-                <div class="content-title">Bugs</div>
-                <schart class="schart" canvasId="line" :options="options2"></schart>
-            </div>
-        </div>
+    <div class="login-wrap">
+        
+        
     </div>
 </template>
 
 <script>
-import Schart from 'vue-schart';
+
 export default {
     name: 'basecharts',
-    components: {
-        Schart
-    },
+
     data() {
         return {
             options1: {
@@ -117,20 +100,11 @@ export default {
 </script>
 
 <style scoped>
-.schart-box {
-    display: inline-block;
-    margin: 20px;
-}
-.schart {
-    width: 600px;
-    height: 400px;
-}
-.content-title {
-    clear: both;
-    font-weight: 400;
-    line-height: 50px;
-    margin: 10px 0;
-    font-size: 22px;
-    color: #1f2f3d;
+.login-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: url(../assets/img/data.png);
+    background-size: 100%;
 }
 </style>
