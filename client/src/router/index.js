@@ -55,7 +55,18 @@ const routes = [
                 component: () => import (
                 /* webpackChunkName: "form" */
                 "../views/AddResource.vue")
-            }, {
+            }, 
+            {
+                path: "/mbasedata",
+                name: "mbasedata",
+                meta: {
+                    title: 'Mbase Data'
+                },
+                component: () => import (
+                /* webpackChunkName: "charts" */
+                "../views/MbaseTable.vue")
+            },
+            {
                 path: "/messages",
                 name: "tabs",
                 meta: {

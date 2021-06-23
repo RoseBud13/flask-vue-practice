@@ -80,6 +80,11 @@ export default {
                     icon: "el-icon-pie-chart",
                     index: "data",
                     title: "Dashboard"
+                },
+                {
+                    icon: "el-icon-pie-chart",
+                    index: "mbasedata",
+                    title: "Mbase Data"
                 }
             ]
         };
