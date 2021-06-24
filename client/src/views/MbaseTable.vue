@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="crumbs">
+        {{ infodata }}
+        <!-- <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item>
                     <i class="el-icon-lx-cascades"></i> Resources
@@ -35,31 +36,25 @@
                 <el-table-column prop="rsrc_type" label="Type" width="70"></el-table-column>
 
             </el-table>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
-import { fetchInfoData } from '../api/mbase'
+import axios from 'axios'
 
 export default {
     name: "mbase",
     data() {
         return {
-            infodata: []
+            infodata: null
         };
     },
-    created() {
-        this.fetchData();
-    },
-    methods: {
-        fetchData() {
-            fetchInfoData().then(response => {
-                console.log(response);
-                this.infodata = response
-            })
-        },
-    }
+    mounted () {
+    axios
+      .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+      .then(response => (this.infodata = response))
+  }
 };
 </script>
 
